@@ -14,6 +14,7 @@ Param(
 	)
 
 if ([string]::IsNullOrWhiteSpace($chocoAppList) -eq $false -or [string]::IsNullOrWhiteSpace($dismAppList) -eq $false)
+	{
 	try{
 		choco config get cacheLocation
 	}catch{
@@ -26,29 +27,32 @@ if ([string]::IsNullOrWhiteSpace($chocoAppList) -eq $false -or [string]::IsNullO
 			choco source add -n=Artifactory -s="http://release.helsenord.no:8081/artifactory/api/nuget/Chocolatey-ServerSetups"
 			choco source remove -n=chocolatey
 		}
-		else { Write-Output "Could not reach proxy, is the server in the correct zone?" }
+		else
+		{ Write-Output "Could not reach proxy, is the server in the correct zone?"
+		exit }
+		}
 	}
-	
 <# if $chocoApplist contains data, we try to choco install #>
-([string]::IsNullOrWhiteSpace($chocoAppList) -eq $false){
+if ([string]::IsNullOrWhiteSpace($chocoAppList) -eq $false){
 Write-Host "Choco Apps will be installed"
 
-$appsToInstall = $chocoAppList -split "," | foreach { "$($.Trim())" }
+$appsToInstall = $chocoAppList -split "," | foreach { "$($_.Trim())" }
 
 foreach ($app in $appsToInstall)
 	{
 		Write-Host "Installing $app"
 		& choco install $app /y | Write-Output
 	}
-	
+}
 <# if $dismAppList contains data, we try to install windows features #>
-([string]::IsNullOrWhiteSpace($dismAppList) -eq $false){
+if ([string]::IsNullOrWhiteSpace($dismAppList) -eq $false){
 Write-Host "DISM features will be installed"
 
-$appsToInstall = $dismAppList -split "," | foreach { "$($.Trim())" }
+$appsToInstall = $dismAppList -split "," | foreach { "$($_.Trim())" }
 
-foreach ($app in $dismAppList)
+foreach ($app in $appsToInstall)
 	{
 		Write-Host "Installing $app"
 		& choco install $app /y /source windowsfeatures | Write-Output
 	}
+}
