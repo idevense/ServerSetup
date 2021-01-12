@@ -18,9 +18,7 @@ if ([string]::IsNullOrWhiteSpace($chocoAppList) -eq $false -or [string]::IsNullO
 	try{
 		choco config get cacheLocation
 	}catch{
-		Write-Output "Chocolatey not detected, trying to install it now. Hope you activated the proxy..."
-		If ((Test-NetConnection -ComputerName www-proxy.helsenord.no -Port 8080).TcpTestSucceeded) {
-			Write-Output "proxy reachable, continuing"
+			Write-Output "Chocolatey not detected, trying to install it now."
 			$env:chocolateyProxyLocation = '172.29.3.232:8080'
 			Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 	
@@ -28,9 +26,7 @@ if ([string]::IsNullOrWhiteSpace($chocoAppList) -eq $false -or [string]::IsNullO
 			choco source remove -n=chocolatey
 		}
 		else
-		{ Write-Output "Could not reach proxy, is the server in the correct zone?"
-		exit }
-		}
+		{ Write-Error -Message "Could not reach proxy, is the server in the correct zone?" }
 	}
 <# if $chocoApplist contains data, we try to choco install #>
 if ([string]::IsNullOrWhiteSpace($chocoAppList) -eq $false){

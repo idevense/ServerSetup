@@ -59,4 +59,5 @@ function Set-Proxy {
 function Remove-Proxy (){    
     Set-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings' -name ProxyServer -Value ""
     Set-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Internet Settings' -name ProxyEnable -Value 0
+	Write-Host "Proxy settings has been removed, proxy is now turned off"
 }
