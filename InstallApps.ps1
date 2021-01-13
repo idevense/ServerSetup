@@ -25,8 +25,6 @@ if ([string]::IsNullOrWhiteSpace($chocoAppList) -eq $false -or [string]::IsNullO
 			choco source add -n=Artifactory -s="http://release.helsenord.no:8081/artifactory/api/nuget/Chocolatey-ServerSetups"
 			choco source remove -n=chocolatey
 		}
-		else
-		{ Write-Error -Message "Could not reach proxy, is the server in the correct zone?" }
 	}
 <# if $chocoApplist contains data, we try to choco install #>
 if ([string]::IsNullOrWhiteSpace($chocoAppList) -eq $false){
@@ -49,6 +47,6 @@ $appsToInstall = $dismAppList -split "," | foreach { "$($_.Trim())" }
 foreach ($app in $appsToInstall)
 	{
 		Write-Host "Installing $app"
-		& choco install $app /y /source windowsfeatures | Write-Output
+		& choco install --yes --no-progress $app -source windowsfeatures | Write-Output
 	}
 }
