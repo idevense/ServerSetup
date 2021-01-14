@@ -11,10 +11,10 @@ Param(
 
 switch ($serverType)
 {
-    web {
+    web { 
             Write-Host "Webserver-template valgt..."
             $chocoAppList = "7zip, googlechrome"
-            $dismAppList = "File-Services"
+            $dismAppList = "File-Services, DFSR-Infrastructure-ServerEdition, IIS-WebServerRole, IIS-CustomLogging, IIS-ODBCLogging, IIS-LoggingLibraries, IIS-RequestMonitor , IIS-HttpTracing, IIS-IPSecurity, IIS-WindowsAuthentication, IIS-NetFxExtensibility45, IIS-ASPNET45, IIS-CGI, IIS-ISAPIExtensions, IIS-ISAPIFilter, IIS-ServerSideIncludes, IIS-ManagementService, WCF-HTTP-Activation45, IIS-HostableWebCore, WAS-WindowsActivationService, WAS-ProcessModel, WAS-ConfigurationAPI"
         }
     app { 
             Write-Host "Appserver-template valgt..."
@@ -30,7 +30,6 @@ switch ($serverType)
     Default { "Invalid server type, exiting"; exit }
  }
 
-#"File-Services, FS-FileServer, FS-DFS-Replication, Storage-Services, Web-Server, Web-Common-Http, Web-Default-Doc, Web-Dir-Browsing, Web-Http-Errors, Web-Static-Content, Web-Health, Web-Http-Logging, Web-Custom-Logging, Web-Log-Libraries, Web-ODBC-Logging, Web-Request-Monitor, Web-Http-Tracing, Web-Performance, Web-Stat-Compression, Web-Security, Web-Filtering, Web-Basic-Auth, Web-Digest-Auth, Web-IP-Security, Web-Windows-Auth, Web-App-Dev, Web-Net-Ext45, Web-ASP, Web-Asp-Net45, Web-CGI, Web-ISAPI-Ext, Web-ISAPI-Filter, Web-Includes, Web-Mgmt-Tools, Web-Mgmt-Console, Web-Mgmt-Service, NET-Framework-45-Features, NET-Framework-45-Core, NET-Framework-45-ASPNET, NET-WCF-Services45, NET-WCF-HTTP-Activation45, NET-WCF-TCP-PortSharing45, Web-WHC, Telnet-Client, WAS, WAS-Process-Model, WAS-Config-APIs"
 $proxyFilePath = $PSScriptRoot + "\proxy.ps1"
 $installapps = $PSSCriptRoot + "\InstallApps.ps1"
 
