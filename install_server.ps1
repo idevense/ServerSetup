@@ -13,7 +13,7 @@ switch ($serverType)
 {
     web { 
             Write-Host "Webserver-template valgt..."
-            $chocoAppList = "7zip, googlechrome"
+            $chocoAppList = "7zip, googlechrome, notepadplusplus"
             $dismAppList = "File-Services, DFSR-Infrastructure-ServerEdition, IIS-WebServerRole, IIS-CustomLogging, IIS-ODBCLogging, IIS-LoggingLibraries, IIS-RequestMonitor , IIS-HttpTracing, IIS-IPSecurity, IIS-WindowsAuthentication, IIS-NetFxExtensibility45, IIS-ASPNET45, IIS-CGI, IIS-ISAPIExtensions, IIS-ISAPIFilter, IIS-ServerSideIncludes, IIS-ManagementService, WCF-HTTP-Activation45, IIS-HostableWebCore, WAS-WindowsActivationService, WAS-ProcessModel, WAS-ConfigurationAPI"
         }
     app { 

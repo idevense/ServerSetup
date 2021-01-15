@@ -4,7 +4,7 @@
 	$dismAppList = "File-Services, FS-FileServer, .."
 	
 	you invoke the script like this:
-	Invoke-Expression "InstallApps.ps1 ""$chocoAppList"" ""$dismAppList"""
+	Invoke-Expression "InstallApps.ps1 ""$chocoAppList"" ""$dismAppList"""  or dot source it like so: . $installApps "$chocoAppList" "$dismAppList"
 	
 	Idar Evensen 2021
 #>
@@ -26,6 +26,7 @@ if ([string]::IsNullOrWhiteSpace($chocoAppList) -eq $false -or [string]::IsNullO
 			choco source remove -n=chocolatey
 		}
 	}
+	
 <# if $chocoApplist contains data, we try to choco install #>
 if ([string]::IsNullOrWhiteSpace($chocoAppList) -eq $false){
 Write-Host "Choco Apps will be installed"
@@ -38,6 +39,7 @@ foreach ($app in $appsToInstall)
 		& choco install $app /y | Write-Output
 	}
 }
+
 <# if $dismAppList contains data, we try to install windows features #>
 if ([string]::IsNullOrWhiteSpace($dismAppList) -eq $false){
 Write-Host "DISM features will be installed"
